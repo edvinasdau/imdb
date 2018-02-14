@@ -37,13 +37,7 @@ class ForeignKeys extends Migration
 
         });
     }
-
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+    
     public function down()
     {
         Schema::table('movies', function (Blueprint $table) {
