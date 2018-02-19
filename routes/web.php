@@ -18,3 +18,9 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/category', 'CategoryController@index')->name('category');
+Route::post('/category', 'CategoryController@store_category')->name('store_category');
+Route::get('/movies', 'MoviesController@index')->name('movies');
+Route::post('/movies', 'MoviesController@store_movie')->name('store_movies');
+Route::get('/actors', 'ActorsController@index')->name('actors');
+Route::post('/actors', 'ActorsController@store_actor')->name('store_actor');
