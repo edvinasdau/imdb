@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
 use Auth;
-
+use App\Actor;
 class ActorsController extends Controller
 {
     public function index(){
-        $cat = Category::get();
-        return view("actors", ['categories' => $cat]);
+        $act = Actor::get();
+        return view("actors", ['actors' => $act]);
     }
 
 
@@ -18,5 +17,11 @@ class ActorsController extends Controller
         $user = Auth::user();
         $user->actors()->create($request->except('_token'));
         return redirect()->back();
+    }
+
+    public function edit($id)
+    {        $act = Actor::get();
+        $actor = Actor::findOrFail($id);
+        return view('actors', ['actors' => $act, 'data' => $actor]);
     }
 }

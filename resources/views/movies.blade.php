@@ -27,5 +27,33 @@
         <input type="text" class="form-control" name="rating">
     </div><br>
     <button type="submit" class="btn btn-default">Submit</button>
-</form>
+</form><br><br>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover table-condensed">
+        <thead>
+        <tr>
+            <th><strong>Name</strong></th>
+            <th><strong>Description</strong></th>
+            <th><strong>Years</strong></th>
+            <th><strong>Ratings</strong></th>
+            <th><strong></strong></th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @foreach($movies as $movie)
+            <tr>
+                <td value="{{$movie->id}}">{{$movie->name}}</td>
+                <td value="{{$movie->id}}">{{$movie->description}}</td>
+                <td value="{{$movie->id}}">{{$movie->years}}</td>
+                <td value="{{$movie->id}}">{{$movie->ratings}}</td>
+                <td><a class="btn btn-warning">Edit</a>
+                    <a class="btn btn-danger">Delete</a></td>
+            </tr>
+        @endforeach
+
+        </tbody>
+    </table>
+</div>
     @endsection
