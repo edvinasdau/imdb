@@ -32,11 +32,10 @@
 
         @foreach($actors as $actor)
             <tr>
-                <td value="{{$actor->id}}">{{$actor->name}}
-                </td>
+                <td value="{{$actor->id}}">{{$actor->name}}</td>
                 <td value="{{$actor->id}}">{{$actor->birthday}}</td>
                 <td value="{{$actor->id}}">{{$actor->deathday}}</td>
-                 <td><a class="btn btn-warning">Edit</a>
+                 <td><a href="{{route("actors_edit", $actor->id)}}" class="btn btn-warning">Edit</a>
                     <a class="btn btn-danger">Delete</a></td>
             </tr>
         @endforeach

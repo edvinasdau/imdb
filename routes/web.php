@@ -26,3 +26,5 @@ Route::get('/actors', 'ActorsController@index')->name('actors');
 Route::post('/actors', 'ActorsController@store_actor')->name('store_actor');
 Route::get('/category/edit/{id}', 'CategoryController@edit')->name('category_edit');
 Route::get('/actors/edit/{id}', 'ActorsController@edit')->name('actors_edit');
+Route::get('/movies/edit/{id}', 'MoviesController@edit')->name('movies_edit');
+Route::delete('/category/delete/{id}', 'CategoryController@destroy')->name('category_delete');

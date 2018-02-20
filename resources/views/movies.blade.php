@@ -20,7 +20,7 @@
     </div><br>
     <div class="form-group">
         <label>Years</label>
-        <input type="text" class="form-control" name="years">
+        <input type="number" class="form-control" name="years">
     </div><br>
     <div class="form-group">
         <label>Rating</label>
@@ -48,7 +48,7 @@
                 <td value="{{$movie->id}}">{{$movie->description}}</td>
                 <td value="{{$movie->id}}">{{$movie->years}}</td>
                 <td value="{{$movie->id}}">{{$movie->ratings}}</td>
-                <td><a class="btn btn-warning">Edit</a>
+                <td><a href="{{route("movies_edit", $movie->id)}}" class="btn btn-warning">Edit</a>
                     <a class="btn btn-danger">Delete</a></td>
             </tr>
         @endforeach

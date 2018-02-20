@@ -29,11 +29,10 @@
                 <td value="{{$category->id}}">{{$category->name}}</td>
                 <td value="{{$category->id}}">{{$category->description}}</td>
                    <td> <a href="{{route("category_edit", $category->id)}}" class="btn btn-warning">Edit</a>
-                    <a class="btn btn-danger">Delete</a></td>
-
+                        <a href="{{route("category_delete", $category->id)}}" class="btn btn-danger">Delete</a>
+                   </td>
             </tr>
              @endforeach
-
         </tbody>
     </table>
 </div>

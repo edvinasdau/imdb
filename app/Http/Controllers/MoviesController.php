@@ -22,4 +22,10 @@ class MoviesController extends Controller
         return redirect()->back();
     }
 
+    public function edit($id)
+    {        $mov = Movie::get();
+        $cat = Category::get();
+        $movie = Movie::findOrFail($id);
+        return view('movies', ['movies' => $mov, 'data' => $movie, 'categories' =>$cat]);
+    }
 }
