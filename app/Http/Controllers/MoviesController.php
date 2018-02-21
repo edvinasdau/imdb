@@ -22,10 +22,24 @@ class MoviesController extends Controller
         return redirect()->back();
     }
 
-    public function edit($id)
-    {        $mov = Movie::get();
+    public function edit($id){
         $cat = Category::get();
+        $mo = Movie::all();
+            $mov = Movie::get();
         $movie = Movie::findOrFail($id);
-        return view('movies', ['movies' => $mov, 'data' => $movie, 'categories' =>$cat]);
+        return view('movies', ['movies' => $mo, 'data' => $movie, 'categories' => $cat, 'movies' => $mov]);
+    }
+
+    public function update( Request $request,$id)
+    {
+        $movie = Movie::findOrFail($id);
+        $movie->update($request->except('_token'));
+        return redirect()->back()->with('status', 'updated');
+    }
+
+    public function destroy($id){
+        $movie = Movie::findOrFail($id);
+        $movie->delete();
+        return redirect()->back();
     }
 }

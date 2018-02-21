@@ -1,30 +1,30 @@
 @extends("layouts.app")
 @section('content')
-<form method="post" action="{{route('store_movies')}}">
+<form method="post" action="{{!empty($data)? route('movie_update', $data->id): route('store_movies')}}">
     {{ csrf_field() }}
     <div class="form-group">
 <select name="category_id">
     <label>Categories</label>
         @foreach($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option>
+            <option @isset($data) @if ($category->id == $data->category_id) selected @endif @endisset value="{{$category->id}}">{{$category->name}}</option>
         @endforeach
 </select>
     </div><br>
     <div class="form-group">
       <label>Name</label>
-      <input type="text" class="form-control" name="name">
+      <input type="text" value="{{!empty($data) ? $data->name : ''}}" class="form-control" name="name">
     </div><br>
     <div class="form-group">
       <label>Description</label>
-      <input type="text" class="form-control" name="description">
+      <input type="text" value="{{!empty($data) ? $data->description : ''}}" class="form-control" name="description">
     </div><br>
     <div class="form-group">
         <label>Years</label>
-        <input type="number" class="form-control" name="years">
+        <input type="number" value="{{!empty($data) ? $data->years : ''}}" class="form-control" name="years">
     </div><br>
     <div class="form-group">
         <label>Rating</label>
-        <input type="text" class="form-control" name="rating">
+        <input type="text" class="form-control" value="{{!empty($data) ? $data->rating : ''}}" name="rating">
     </div><br>
     <button type="submit" class="btn btn-default">Submit</button>
 </form><br><br>
@@ -37,7 +37,7 @@
             <th><strong>Description</strong></th>
             <th><strong>Years</strong></th>
             <th><strong>Ratings</strong></th>
-            <th><strong></strong></th>
+            <th><strong>Options</strong></th>
         </tr>
         </thead>
         <tbody>
@@ -47,9 +47,9 @@
                 <td value="{{$movie->id}}">{{$movie->name}}</td>
                 <td value="{{$movie->id}}">{{$movie->description}}</td>
                 <td value="{{$movie->id}}">{{$movie->years}}</td>
-                <td value="{{$movie->id}}">{{$movie->ratings}}</td>
+                <td value="{{$movie->id}}">{{$movie->rating}}</td>
                 <td><a href="{{route("movies_edit", $movie->id)}}" class="btn btn-warning">Edit</a>
-                    <a class="btn btn-danger">Delete</a></td>
+                    <a href="{{route("movie_delete", $movie->id)}}" class="btn btn-danger">Delete</a></td>
             </tr>
         @endforeach
 

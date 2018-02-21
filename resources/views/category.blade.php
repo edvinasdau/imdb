@@ -1,6 +1,6 @@
 @extends("layouts.app")
 @section('content')
-<form method="post" action="{{route('store_category')}}">
+<form method="post" action="{{!empty($data)? route('category_update', $data->id):  route('store_category')}}">
     {{ csrf_field() }}
     <div class="form-group">
       <label>Name</label>
@@ -11,6 +11,7 @@
       <input type="text" class="form-control" value="{{!empty($data) ? $data->description : ''}}" name="description">
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
+
 </form><br><br>
 
     <div class="table-responsive">
@@ -19,7 +20,7 @@
         <tr>
             <th><strong>Name</strong></th>
             <th><strong>Description</strong></th>
-            <th><strong></strong></th>
+            <th><strong>Options</strong></th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +29,10 @@
             <tr>
                 <td value="{{$category->id}}">{{$category->name}}</td>
                 <td value="{{$category->id}}">{{$category->description}}</td>
-                   <td> <a href="{{route("category_edit", $category->id)}}" class="btn btn-warning">Edit</a>
+
+                   <td>
+
+                       <a href="{{route("category_edit", $category->id)}}" class="btn btn-warning">Edit</a>
                         <a href="{{route("category_delete", $category->id)}}" class="btn btn-danger">Delete</a>
                    </td>
             </tr>

@@ -25,19 +25,16 @@ class CategoryController extends Controller
         return view('category', ['categories' => $cat, 'data' => $category]);
     }
 
-//    public function update(Request $request, $id)
-//    {
-//        request()->validate([
-//            'name' => 'required',
-//            'description' => 'required',
-//        ]);
-//        Category::find($id)->update($request->all());
-//        return redirect()->route('category')
-//            ->with('success','Article updated successfully');
-//    }
+    public function update( Request $request,$id)
+    {
+        $category = Category::findOrFail($id);
+        $category->update($request->except('_token'));
+        return redirect()->back()->with('status', 'updated');
+    }
 
     public function destroy($id){
-        $category = Category::findOrFail($id);
-        $category -> delete();
+       $category = Category::findOrFail($id);
+       $category->delete();
+        return redirect()->back();
     }
 }

@@ -1,6 +1,6 @@
 @extends("layouts.app")
 @section('content')
-<form method="post" action="{{route('store_actor')}}">
+<form method="post" action="{{!empty ($data) ? route('actors_update', $data->id): route('store_actor')}}">
     {{ csrf_field() }}
     <div class="form-group">
       <label>Name</label>
@@ -36,7 +36,8 @@
                 <td value="{{$actor->id}}">{{$actor->birthday}}</td>
                 <td value="{{$actor->id}}">{{$actor->deathday}}</td>
                  <td><a href="{{route("actors_edit", $actor->id)}}" class="btn btn-warning">Edit</a>
-                    <a class="btn btn-danger">Delete</a></td>
+                     <a href="{{route("actors_delete", $actor->id)}}" class="btn btn-danger">Delete</a>
+                 </td>
             </tr>
         @endforeach
 
