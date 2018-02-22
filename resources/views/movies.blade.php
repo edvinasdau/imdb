@@ -27,7 +27,12 @@
         <input type="text" class="form-control" value="{{!empty($data) ? $data->rating : ''}}" name="rating">
     </div><br>
     <button type="submit" class="btn btn-default">Submit</button>
-</form><br><br>
+</form><br>
+<form action="">
+    <input type="file" name="pic" accept="image/*">
+    <input type="submit">Upload
+</form>
+<br>
 
 <div class="table-responsive">
     <table class="table table-striped table-hover table-condensed">

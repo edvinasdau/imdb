@@ -14,15 +14,22 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/admin', function () {
+    return view('admin');
+});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/admin', 'AdminController@index')->name('admin');
-Route::get('/admin/users', 'AdminController@show_users')->name('show_users');
+Route::get('/users', 'AdminController@index')->name('users');
+Route::get('/users/users', 'AdminController@show_users')->name('show_users');
 Route::get('/category', 'CategoryController@index')->name('category');
 Route::post('/category', 'CategoryController@store_category')->name('store_category');
-Route::get('/movies', 'MoviesController@index')->name('movies');
+
+Route::group(['middleware'=>'multi'], function (){
+    Route::get('/movies', 'MoviesController@index')->name('movies');
+});
+
 Route::post('/movies', 'MoviesController@store_movie')->name('store_movies');
 Route::get('/actors', 'ActorsController@index')->name('actors');
 Route::post('/actors', 'ActorsController@store_actor')->name('store_actor');

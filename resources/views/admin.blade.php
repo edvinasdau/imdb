@@ -1,38 +1,94 @@
-@extends("layouts.app")
-@section('content')
-<div class="container-fluid">
-    <div class="col">
-        <div style="background-color: yellow" class="row">
-            <h1>Create new user</h1><br>
-            <a class="btn btn-success">Create new user</a
+<!doctype html>
+<html lang="{{ app()->getLocale() }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Imdb</title>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+
+    <!-- Styles -->
+    <style>
+        html, body {
+            background-color: #fff;
+            color: #636b6f;
+            font-family: 'Raleway', sans-serif;
+            font-weight: 100;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .full-height {
+            height: 100vh;
+        }
+
+        .flex-center {
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .position-ref {
+            position: relative;
+        }
+
+        .top-right {
+            position: absolute;
+            right: 10px;
+            top: 18px;
+        }
+
+        .content {
+            text-align: center;
+        }
+
+        .title {
+            font-size: 84px;
+        }
+
+        .links > a {
+            color: #636b6f;
+            padding: 0 25px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .m-b-md {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="flex-center position-ref full-height">
+    @if (Route::has('login'))
+        <div class="top-right links">
+            @auth
+            <a href="{{ url('/home') }}">Home</a>
+            @else
+                <a href="{{ route('login') }}">Login</a>
+                <a href="{{ route('register') }}">Register</a>
+                @endauth
+        </div>
+    @endif
+
+    <div class="content">
+        <div class="title m-b-md">
+            Imdb
+        </div>
+
+        <div class="links">
+            <a href="category">Categories</a>
+            <a href="movies">Movies</a>
+            <a href="actors">Actors</a>
+            <a href="users/users">Users</a>
         </div>
     </div>
-</div><br><br><br>
-<div class="container">
-    <h2>Registered users</h2>
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-            @foreach ($users as $user)
-        <tr>
-            <td value="{{$user->id}}">{{$user->name}}</td>
-            <td value="{{$user->id}}">{{$user->email}}</td>
-            <td>
-                <form action="">
-                    <input type="radio" name="status" value="admin"> Admin<br>
-                    <input type="radio" name="status" value="user"> User<br>
-                    <input type="radio" name="status" value="guest"> Guest
-                </form>
-            </td>
-        </tr>
-        @endforeach
-        </tbody>
-    </table>
 </div>
-@endsection
+</body>
+</html>
