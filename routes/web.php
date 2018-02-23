@@ -42,3 +42,6 @@ Route::get('/movies/delete/{id}', 'MoviesController@destroy')->name('movie_delet
 Route::get('/actors/edit/{id}', 'ActorsController@edit')->name('actors_edit');
 Route::post('/actors/update/{id}', 'ActorsController@update')->name('actors_update');
 Route::get('/actors/delete/{id}', 'ActorsController@destroy')->name('actors_delete');
+
+Route::post('/actors/upload/{id}', 'UploadController@upload_actor')->name('actor_pic_upload');
+Route::post('/movies/upload/{id}', 'UploadController@upload_movie')->name('movie_pic_upload');

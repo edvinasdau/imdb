@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\Actor;
+use App\Image;
+use Storage;
+
 class ActorsController extends Controller
 {
     public function index(){
@@ -34,7 +37,13 @@ class ActorsController extends Controller
 
     public function destroy($id){
         $actor = Actor::findOrFail($id);
+        $image = $actor->image;
+        foreach ($image as $img)
+        {
+        Storage::delete('public/image/' . $img->filename);
+        }
         $actor->delete();
-        return redirect()->back();
+        $actor->image()->delete();
+        return redirect('actors');
     }
 }

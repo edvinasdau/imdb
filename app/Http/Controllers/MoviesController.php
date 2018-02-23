@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Movie;
 use Auth;
+use Storage;
 
 class MoviesController extends Controller
 {
@@ -39,7 +40,13 @@ class MoviesController extends Controller
 
     public function destroy($id){
         $movie = Movie::findOrFail($id);
+        $image = $movie->image;
+        foreach ($image as $img)
+        {
+            Storage::delete('public/image/' . $img->filename);
+        }
         $movie->delete();
-        return redirect()->back();
+        $movie->image()->delete();
+        return redirect('movies');
     }
 }

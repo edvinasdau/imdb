@@ -28,10 +28,13 @@
     </div><br>
     <button type="submit" class="btn btn-default">Submit</button>
 </form><br>
-<form action="">
-    <input type="file" name="pic" accept="image/*">
-    <input type="submit">Upload
-</form>
+@if(isset($data))
+    <form method="post" enctype="multipart/form-data" action="{{route('movie_pic_upload', $data->id)}}">
+        {{csrf_field()}}
+        <input type="file" name="pic">
+        <input type="submit">Upload
+    </form><br>
+@endif
 <br>
 
 <div class="table-responsive">
@@ -39,6 +42,7 @@
         <thead>
         <tr>
             <th><strong>Name</strong></th>
+            <th><strong>Image</strong></th>
             <th><strong>Description</strong></th>
             <th><strong>Years</strong></th>
             <th><strong>Ratings</strong></th>
@@ -50,6 +54,9 @@
         @foreach($movies as $movie)
             <tr>
                 <td value="{{$movie->id}}">{{$movie->name}}</td>
+                <td>
+                    <img src="{{$movie->featureImage}}">
+                </td>
                 <td value="{{$movie->id}}">{{$movie->description}}</td>
                 <td value="{{$movie->id}}">{{$movie->years}}</td>
                 <td value="{{$movie->id}}">{{$movie->rating}}</td>
