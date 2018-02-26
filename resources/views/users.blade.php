@@ -16,12 +16,15 @@
                     <td value="{{$user->id}}">{{$user->name}}</td>
                     <td value="{{$user->id}}">{{$user->email}}</td>
                     <td>
-                        <form action="">
-                            <input type="radio" name="status" value="admin"> Admin<br>
-                            <input type="radio" name="status" value="user"> User<br>
-                            <input type="radio" name="status" value="guest"> Guest
+                        <form method="post" action="{{ route('change_role', $user->id) }}">
+                            {{csrf_field()}}
+                            <select onChange="this.form.submit()" name="change_role">
+                                <option {{ $user->role == "admin" ? 'selected' : '' }} value="admin">Admin</option>
+                                <option {{ $user->role == "user" ? 'selected' : '' }} value="user">User</option>
+                            </select>
                         </form>
                     </td>
+                    <td>cia bus delete</td>
                 </tr>
             @endforeach
             </tbody>

@@ -8,7 +8,6 @@ use App\User;
 class AdminController extends Controller
 {
     public function index()
-
     {
         return view('admin');
     }
@@ -16,5 +15,12 @@ class AdminController extends Controller
     public function show_users(){
         $user = User::get();
         return view('users', ['users' => $user]);
+    }
+
+    public function change_role($id, Request $request){
+        $user = User::findOrFail($id);
+        $user->update(['role' => $request-> change_role]);
+        return redirect()->back();
+
     }
 }

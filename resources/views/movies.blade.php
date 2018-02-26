@@ -1,5 +1,7 @@
 @extends("layouts.app")
 @section('content')
+    <div class="container">
+    @if(Auth::check())
 <form method="post" action="{{!empty($data)? route('movie_update', $data->id): route('store_movies')}}">
     {{ csrf_field() }}
     <div class="form-group">
@@ -8,6 +10,7 @@
         @foreach($categories as $category)
             <option @isset($data) @if ($category->id == $data->category_id) selected @endif @endisset value="{{$category->id}}">{{$category->name}}</option>
         @endforeach
+
 </select>
     </div><br>
     <div class="form-group">
@@ -28,6 +31,8 @@
     </div><br>
     <button type="submit" class="btn btn-default">Submit</button>
 </form><br>
+
+@endif
 @if(isset($data))
     <form method="post" enctype="multipart/form-data" action="{{route('movie_pic_upload', $data->id)}}">
         {{csrf_field()}}
@@ -46,7 +51,9 @@
             <th><strong>Description</strong></th>
             <th><strong>Years</strong></th>
             <th><strong>Ratings</strong></th>
+            @if(Auth::check())
             <th><strong>Options</strong></th>
+            @endif
         </tr>
         </thead>
         <tbody>
@@ -60,12 +67,15 @@
                 <td value="{{$movie->id}}">{{$movie->description}}</td>
                 <td value="{{$movie->id}}">{{$movie->years}}</td>
                 <td value="{{$movie->id}}">{{$movie->rating}}</td>
+                @if(Auth::check())
                 <td><a href="{{route("movies_edit", $movie->id)}}" class="btn btn-warning">Edit</a>
                     <a href="{{route("movie_delete", $movie->id)}}" class="btn btn-danger">Delete</a></td>
+                @endif
             </tr>
         @endforeach
 
         </tbody>
     </table>
 </div>
+    </div>
     @endsection
