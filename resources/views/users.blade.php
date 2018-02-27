@@ -24,7 +24,7 @@
                             </select>
                         </form>
                     </td>
-                    <td>cia bus delete</td>
+                    <td><a href="{{route("user_delete", $user->id)}}" class="btn btn-danger">Delete</a></td>
                 </tr>
             @endforeach
             </tbody>

@@ -1,6 +1,6 @@
 @extends("layouts.app")
 @section('content')
-    <div class="container">
+    <div class="container" >
     @if(Auth::check())
 <form method="post" action="{{!empty($data)? route('movie_update', $data->id): route('store_movies')}}">
     {{ csrf_field() }}

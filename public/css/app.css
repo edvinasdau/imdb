@@ -8351,6 +8351,10 @@ button.close {
 }
 
 body {
-  background-color: yellowgreen;
+  background-color: yellow;
+  background-image: url("https://png.pngtree.com/thumb_back/fh260/back_pic/00/09/00/31562c78196990f.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 

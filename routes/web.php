@@ -42,6 +42,11 @@ Route::post('/actors/update/{id}', 'ActorsController@update')->name('actors_upda
 Route::get('/actors/delete/{id}', 'ActorsController@destroy')->name('actors_delete');
         Route::post('/actors/upload/{id}', 'UploadController@upload_actor')->name('actor_pic_upload');
 Route::post('/movies/upload/{id}', 'UploadController@upload_movie')->name('movie_pic_upload');
-
+    Route::post('/users/users/{id}', 'AdminController@change_role')->name('change_role');
+    Route::get('/users/delete/{id}', 'AdminController@destroy')->name('user_delete');
 });
-Route::post('/users/users/{id}', 'AdminController@change_role')->name('change_role');
+
+Route::middleware('guest')->group(function(){
+Route::get('/fb/login', 'FacebookController@redirect')->name('facebook.redirect');
+Route::get('/fb/callback', 'FacebookController@callback')->name('facebook.callback');
+});
