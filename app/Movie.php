@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Actor;
 
 class Movie extends Model
 {
@@ -21,5 +22,10 @@ class Movie extends Model
             return "sdfs";
         }
         return asset("storage/image/" . $this->image()->first()->filename);
+    }
+
+    public function actors()
+    {
+        return $this->belongsToMany('App\Actor');
     }
 }

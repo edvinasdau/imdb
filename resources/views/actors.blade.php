@@ -15,7 +15,15 @@
             <label>Deathday</label>
             <input type="text" value="{{!empty($data) ? $data->deathday : ''}}" class="form-control" name="deathday">
         </div><br>
+        <div class="form-group">
+            <label>Starring in:</label>
+        <select class="js-example-basic-multiple" name="movies[]" multiple="multiple">
 
+            @foreach($movies as $movie)
+                <option value="{{$movie->id}}">{{$movie->name}}</option>
+            @endforeach
+        </select>
+        </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form><br>
         @endif
@@ -42,9 +50,11 @@
 
             @foreach($actors as $actor)
                 <tr>
-                    <td value="{{$actor->id}}">{{$actor->name}}</td>
                     <td>
-                        <img src="{{$actor->featureImage}}">
+                        <a href="{{route('single_actor', $actor->id)}}">{{$actor->name}}</a>
+                    </td>
+                    <td>
+                        <a href="{{route('single_actor', $actor->id)}}"> <img src="{{$actor->featureImage}}"></a>
                     </td>
                     <td value="{{$actor->id}}">{{$actor->birthday}}</td>
                     <td value="{{$actor->id}}">{{$actor->deathday}}</td>

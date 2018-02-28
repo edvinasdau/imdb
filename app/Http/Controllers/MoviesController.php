@@ -49,4 +49,13 @@ class MoviesController extends Controller
         $movie->image()->delete();
         return redirect('movies');
     }
+
+    public function single_movie($id)
+    {
+        $movie = Movie::findOrFail($id);
+        $actors = $movie->actors;
+        //dd($actors);
+        return view('single_movie', ['movie' => $movie, 'actors' => $actors]);
+
+    }
 }
