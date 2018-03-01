@@ -49,14 +49,19 @@
         <br>
 
         <div class="table-responsive">
-            <table class="table table-striped table-hover table-condensed">
-                <thead>
-                <strong>Sort by category </strong>
-                <select name="category_id">
+            <strong>Sort by category </strong>
+            <form method="get" action="{{route('show_by_category')}}">
+                {{csrf_field()}}
+                <select onchange="this.form.submit()" name="category_id">
+                        <option value="all">All</option>
                     @foreach($categories as $category)
-                        <option @isset($data) @if ($category->id == $data->category_id) selected @endif @endisset value="{{$category->id}}">{{$category->name}}</option>
+                        <option @isset($cat->id) @if ($category->id == $cat->id) selected @endif @endisset value="{{$category->id}}">{{$category->name}}</option>
                     @endforeach
                 </select>
+            </form>
+            <table class="table table-striped table-hover table-condensed">
+                <thead>
+
                 <tr>
                     <th><strong>Name</strong></th>
                     <th><strong>Image</strong></th>

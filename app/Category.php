@@ -9,4 +9,11 @@ class Category extends Model
     public $timestamps = false;
     protected $table = 'category';
     protected $fillable = ['name', 'description', 'user_id'];
+
+    public function movies()
+    {
+        return $this->hasMany(Movie::class);
+    }
 }
+
+

@@ -56,6 +56,39 @@ class MoviesController extends Controller
         $actors = $movie->actors;
         //dd($actors);
         return view('single_movie', ['movie' => $movie, 'actors' => $actors]);
-
     }
+
+    public function show_by_category(Request $request)
+    {
+        $categories = Category::all();
+         if($request->category_id == 'all'){
+             $movies = Movie::all();
+             $category = '';
+         }  else {
+             $category = Category::findOrFail($request->category_id);
+             $movies = $category->movies()->orderBy('name', 'asc')->get();
+         }
+        return view('movies', ['movies' => $movies, 'cat' => $category, 'categories' => $categories]);
+    }
+
+    public function test()
+    {
+
+        $filmai = json_decode(file_get_contents('https://api.themoviedb.org/3/genre/movie/list?api_key=be98f6d22107b703991b078fdf1aeb9c&language=en-US'));
+
+        //dd($filmai);
+        $description = '';
+        foreach ($filmai->genres as $filmas){
+           $category_id = Category::create([
+               'name' => $filmas->name,
+               'description' => $description,
+               'user_id' => '5']);
+
+           // $category_id->id
+        }
+
+
+        //return view('/movies', ['movies' => $filmai, 'categories' => $categories] );
+    }
+
 }

@@ -47,6 +47,8 @@ Route::post('/movies/upload/{id}', 'UploadController@upload_movie')->name('movie
 
 });
 
+Route::get('/filmai', 'MoviesController@test')->name('test');
+Route::get('/movies/sort', 'MoviesController@show_by_category')->name('show_by_category');
 Route::get('/single_actor/{id}', 'ActorsController@single_actor')->name('single_actor');
 Route::get('/single_movie/{id}', 'MoviesController@single_movie')->name('single_movie');
 Route::middleware('guest')->group(function(){
