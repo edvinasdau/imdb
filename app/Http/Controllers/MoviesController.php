@@ -79,28 +79,32 @@ class MoviesController extends Controller
         $description = '';
         foreach($genres->genres as $genre) {
 
-           $category = Category::create([
-              'name' => $genre->name,
-               'description' => $description,
-               'user_id' => '5']);
+//           $category = Category::create([
+//              'name' => $genre->name,
+//               'description' => $description,
+//               'user_id' => '5']);
             $genre_id = $genre->id;
 
             $filmai = json_decode(file_get_contents('https://api.themoviedb.org/3/genre/'. $genre_id .'/movies?api_key=be98f6d22107b703991b078fdf1aeb9c&language=en-US&include_adult=false&sort_by=created_at.asc'));
+
 //dd($filmai);
             foreach($filmai->results as $filmas){
 
-                $date = explode('-', $filmas->release_date);
-                $date = $date[0];
+//                $date = explode('-', $filmas->release_date);
+//                $date = $date[0];
+//
+//                Movie::create ([
+//                    'name' => $filmas->original_title,
+//                    'category_id' => $category->id,
+//                    'user_id' => '5',
+//                    'description' => $filmas->overview,
+//                    'years' => $date,
+//                    'rating' => $filmas->vote_average
+//                ]);
+                $filmas_id = $filmas->id;
+                $images = json_decode(file_get_contents('https://api.themoviedb.org/3/movie/'. $filmas_id .'/images?api_key=be98f6d22107b703991b078fdf1aeb9c&language=en-US'));
 
-                Movie::create ([
-                    'name' => $filmas->original_title,
-                    'category_id' => $category->id,
-                    'user_id' => '5',
-                    'description' => $filmas->overview,
-                    'years' => $date,
-                    'rating' => $filmas->vote_average
-                ]);
-                //dd($filmas);
+                dd($images);
             }
         }
 
